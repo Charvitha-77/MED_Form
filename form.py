@@ -73,4 +73,17 @@ if st.button("Submit"):
         save_data()
     else:
         st.warning("⚠️ Please fill in all required fields and accept the consent.")
+import base64
+
+def download_csv():
+    with open("medico_legal_submissions.csv", "rb") as file:
+        b64 = base64.b64encode(file.read()).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="medico_legal_submissions.csv">📥 Download CSV File</a>'
+        st.markdown(href, unsafe_allow_html=True)
+
+# Display the download button
+if os.path.exists("medico_legal_submissions.csv"):
+    st.sidebar.header("📂 Download Data")
+    download_csv()
+
 
